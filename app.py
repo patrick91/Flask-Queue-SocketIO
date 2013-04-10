@@ -1,7 +1,6 @@
-import time
 from collections import deque, namedtuple
 
-from gevent import monkey; monkey.patch_all()
+from gevent import monkey, sleep; monkey.patch_all()
 
 from socketio import socketio_manage
 from socketio.namespace import BaseNamespace
@@ -23,9 +22,9 @@ class QueueNamespace(BaseNamespace):
 
                 self.emit('log', event.type, event.message)
 
-            time.sleep(1)
+            sleep(0.1)
 
-    def recv_connect(self):
+    def on_connect(self):
         self.spawn(self.listener)
 
 @app.route('/socket.io/<path:remaining>')
