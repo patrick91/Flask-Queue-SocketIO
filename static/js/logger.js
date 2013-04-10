@@ -5,6 +5,7 @@ $(function() {
     var WEB_SOCKET_SWF_LOCATION = '/static/js/socketio/WebSocketMain.swf',
         socket = io.connect('/log');
 
+    socket.emit('connect');
     socket.on('log', function (type, message) {
         createMessage(type, message)
     });
